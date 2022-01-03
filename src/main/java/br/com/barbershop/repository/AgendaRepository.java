@@ -13,9 +13,6 @@ public interface AgendaRepository extends JpaRepositoryImplementation<Agenda, Lo
 
 	List<Agenda> findByHoraInicioLessThan(LocalDateTime time);
 	
-	List<Agenda> findByHoraInicioBetweenAndHoraFimBetween(LocalDateTime timeIni1, LocalDateTime timeFin1, LocalDateTime timeIni2, LocalDateTime timeFin2);
-	
-	
 	@Query("SELECT a FROM Agenda a WHERE :horaIni between horaInicio and horaFim OR :horaFin between horaInicio and horaFim")
 	List<Agenda> findByHoraIniAndHoraFin(@Param("horaIni") LocalDateTime horaIni, @Param("horaFin")LocalDateTime horaFin);
 

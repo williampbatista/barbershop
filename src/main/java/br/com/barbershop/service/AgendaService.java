@@ -41,7 +41,7 @@ public class AgendaService {
 	}
 
 	@Scheduled(cron = "0 */1 * * * *")
-	private void notificar() {
+	private void verificarAgenda() {
 		LocalDateTime ldt = LocalDateTime.now();
 
 		List<Agenda> agendas = repository.findByHoraInicioLessThan(ldt.plus(30, ChronoUnit.MINUTES));
@@ -103,6 +103,16 @@ public class AgendaService {
 		}
 
 		return nome + " " + sobreNome;
+	}
+
+	// inserir cron conforme necessidade
+	private void notificarCliente() {
+		LocalDateTime ldt = LocalDateTime.now();
+		// agendamentos para os proximos 15min
+		List<Agenda> agendas = repository.findByHoraInicioLessThan(ldt.plus(15, ChronoUnit.MINUTES));
+
+		// enviar email? sms? notificar no app
+
 	}
 
 }
